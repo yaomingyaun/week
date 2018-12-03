@@ -1,6 +1,7 @@
 package com.bw.ymy.yaomingyuan1203;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
@@ -8,14 +9,16 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 public class Custor extends LinearLayout {
+    //属性
+    String str;
 
     //孩子最高的
     private  int mChildMaxHeight;
 
         //左边距
-    private  int mHscape;
+    private  int mHscape=20;
     //上下间距
-    private  int mVspace;
+    private  int mVspace=20;
 
 
     public Custor(Context context) {
@@ -24,6 +27,8 @@ public class Custor extends LinearLayout {
 
     public Custor(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+
+
     }
 
     //测量
@@ -32,6 +37,7 @@ public class Custor extends LinearLayout {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
         int sizeWidth=MeasureSpec.getSize(widthMeasureSpec);
+
         int sizeHeight=MeasureSpec.getSize(heightMeasureSpec);
 
         measureChildren(widthMeasureSpec,heightMeasureSpec);
@@ -53,7 +59,7 @@ public class Custor extends LinearLayout {
                     left=0;
                 }
             }
-            left=view.getMeasuredWidth()+mHscape;
+            left+=view.getMeasuredWidth()+mHscape;
         }
         setMeasuredDimension(sizeWidth,(top+mChildMaxHeight)<sizeHeight?sizeHeight:top+mChildMaxHeight);
     }
@@ -78,7 +84,7 @@ public class Custor extends LinearLayout {
                 }
             }
             view.layout(left,top,left+view.getMeasuredWidth(),top+getMeasuredHeight());
-            left=view.getMeasuredWidth()+mHscape;
+            left+=view.getMeasuredWidth()+mHscape;
 
         }
 

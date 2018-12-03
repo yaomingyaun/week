@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -34,21 +35,29 @@ public class MainActivity extends AppCompatActivity {
         //玄幻
         for (String str:desc)
         {
-            TextView textView=new TextView(MainActivity.this);
+            final TextView textView=new TextView(MainActivity.this);
             textView.setText(str);
-
             histor.addView(textView);
+            textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(MainActivity.this,textView.getText().toString(),Toast.LENGTH_LONG).show();
+                }
+            });
         }
+
+
 
         List<String> list=dao.select();
         if(list.size()!=0)
         {
             for (String string:list)
             {
-                TextView tv=new TextView(MainActivity.this);
+                 TextView tv=new TextView(MainActivity.this);
                 tv.setText(et.getText());
                 tv.setTextColor(Color.GREEN);
                 custor.addView(tv);
+
             }
         }
 
@@ -56,9 +65,15 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.add).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextView tv=new TextView(MainActivity.this);
+                final TextView tv=new TextView(MainActivity.this);
                 tv.setText(et.getText());
                 tv.setTextColor(Color.GREEN);
+                tv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(MainActivity.this,tv.getText().toString(),Toast.LENGTH_LONG).show();
+                    }
+                });
                 boolean b=dao.sel(et.getText().toString());
                 if(!et.getText().toString().equals("")&&b)
                 {
@@ -68,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        findViewById(R.id.del).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.dell).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dao.dell();
